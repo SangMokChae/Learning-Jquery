@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title> 선택자 </title>  
+<script src="js/jquery.js"></script>
+<script>
+$(function(){
+	$("h1.tit").css("background-color", "#0ff").css("border", "2px solid #f00");
+});
+$(function() {
+	$("li.got").css("background-color", "pink").css("border","1px solid green");
+})
+</script>
+</head>
+<body>
+	<h1 class="tit">제이쿼리</h1>
+	<h2>선택자</h2>
+	<h3 class="tit">직접 선택자</h3>
+	<ul>
+		<li class="got">1</li>
+		<li class="ew">2</li>
+		<li class="ew">3</li>
+		<li class="got">4</li>
+	</ul>
+</body>
+</html>
