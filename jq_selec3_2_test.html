@@ -6,7 +6,14 @@
   <script src="js/jquery.js"></script>
   <script>
   $(function( ){
+    var srcVal = $("#sec_1 img").attr("src");
+    console.log(srcVal);
 
+    $("#sec_1 img").attr({
+      "width": 200,
+      "src": srcVal.replace("1.jpg", "3.jpg"),
+      "alt": "바위"
+    }).removeAttr("border");
   });
   </script>
   </head>
