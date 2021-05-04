@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script> 
+    var age; let age; const age = 0;
+    // var은 한번선언하고 다시 선언 가능 // let, const는 불가능
+   
+    // 호이스팅 - 스코프 내부 어디서든 변수 선언은 최상위에 선언된 것 처럼 행동 / 호이스팅은 스코프단위로 이루어진다.
+    // TDZ(Temporal Dead Zone) - tdz안에 변수들은 사용 불가 (let, const가 해당)
+    // 코드를 예측가능케하고 버그를 줄여준다.
+    
+    // 변수는 3단계(1. 선언단계, 2. 초기화단계, 3.할당단계)로 이루어진다.
+    // var는 선언과 초기화가 함께된다., let은 선언단계와 초기화단계가 분리되어 사용된다., const는 3단계모두 한번에 된다.
+    // var는 함수 스코프이다, let, const는 블록스코프이다.
+
+    // 블록 스코프는 코드블록(함수, if, for, while, try/catch) 내부에서 선언된 변수는 지역변수이다.
+    // 함수 스코프는 함수 안에서 선언되면 함수 밖에서 사용 불가능 하다.
+  </script>
+</body>
+</html> 

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let a = 'age';
+
+    const user = {
+      name : 'Mike',
+      // age : 30,
+      [a] : 30,
+    }
+
+    // a = [a] 이렇게 사용이 가능하다.
+    // 이러한 방식을 computed property(계산된 프로퍼티)라 한다.
+
+    // 객체에서 사용할 수 있는 methods ✍
+    // Object.assign(), Object.keys(), Object.values(), Object.entries(), Object.fromEntries()
+    
+
+    // Object.assign(): 객체 복제 ✍
+
+    // const cloneUser = user; // X
+    // cloneUser.name = 'han'; // 변경된 값에 따라 값이 바뀐다.
+
+    const newUser = Object.assign({}, user); // {}는 초기값이다.
+    // {} + { name : 'Mike', age : 30 } = 초기값안에 할당되는 개념이다.
+    // 이름을 바꾸어도 user의 값이 바뀌지 않는다.
+
+    // const newUser = Object.assign({ gender:'male' }, user);
+    // 결과 값은 => { gender : 'male', name : 'Mike', age : 30 }
+    
+    // Object.assign({ name: 'Tom' }, user);
+    // 결과 값은 => { name : 'Mike', age : 30 } // user값이 덮어쓰기한다.
+
+    /* const user = {
+      name :  'Mike'
+    }
+    const info1 = {
+      age : 30
+    }
+    const info2 = {
+      gender : 'male'
+    }
+
+    Object.assign(user, info1, info2) // 결과 값들이 합쳐진다.
+    */
+
+
+    // Object.keys() : 키 배열 반환 ✍
+    
+    /* 
+    const user = {
+      name :  'Mike',
+      age : 30,
+      gender : 'male',
+    }
+    Object.keys(user);
+
+    // 결과 값은 = ["name", "age", "gender"] // 키들이 배열로 반환한다.
+    */
+
+    // Object.values() : 값 배열 반환 ✍
+
+     /* 
+    const user = {
+      name :  'Mike',
+      age : 30,
+      gender : 'male',
+    }
+    Object.values(user);
+
+    // 결과 값은 = ["Mike", 30, "male"] value 값만 반환이 된다.
+    */
+
+    // Object.entries() : 키 + 값 배열 반환 ✍
+
+    /*
+    cosnt user = {
+      name : "Mike",
+      age : 30,
+      gender : 'male',
+    }
+    Object.entries(user); 
+
+    // 결과 값은 = [ ["name" : "Mike"], ["age" : 30], ["gender" : "male"]] key, value값 모두 반환된다.
+    */
+
+    // Object.fromEntries() :  키/값 배열을 객체로 ✍
+    
+    /*
+    const arr = 
+    [
+      ["name","Mike"],
+      ["age",30],
+      ["gender","male"]
+    ];
+    Object.fromEntries(arr);
+
+    // 결과 값은 = { name : 'Mike', age : 30, gender : 'male', } 배열을 설정값으로 바꾸어 준다.
+    */
+
+    let n = "name";
+    let ag = "age";
+
+    const test = {
+      [n] : "Mike",
+      [ag] : 30,
+      [2 + 4] : 6, // 계산식도 가능하다.
+    }
+
+    // 실전형 예제
+    function makeObj(key, val) {
+      return {
+        [key] : val
+      }
+    }
+    // 어떤게 키가 될지 모를때 유용하다.
+
+    const obj = makeObj("나이", 33);
+
+    let test2 = Object.assign({}, test);
+    test2.name = "Han";
+
+    // test2 = Object.keys(test2);
+    // test2 = Object.values(test2);
+    test2 = Object.entries(test2);
+
+    console.log(test);
+    console.log(test2);
+
+  </script>
+</body>
+</html>

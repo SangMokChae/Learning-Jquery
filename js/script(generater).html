@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>  
+  <script>
+    let user = {
+      name : 'mok',
+      age : 30,
+    }
+
+    // 객체 리터럴 (객체안에 여러 변수 정보를 내포하고 있는 것)
+
+    // 생성자 함수 / 생성자 함수를 만들때는 첫글자를 대문자로 해서 만들어준다.
+    function User(name, age) {
+      this.name = name;
+      this.age = age;
+      this.sayName = function() { // method를 추가해 준다.
+        console.log(this.name); 
+      }
+    }
+
+    let user1 = new User('Mike', 30);
+    let user2 = new User('Jane', 22);
+    let user3 = new User('Tom', 17);
+    let user5 = new User('Han', 40);
+
+    // new를 사용해서 호출해준다.
+    // 생성자 함수는 붕어빵 틀이나 와플팬과 비슷하다. 특정한 규격으로 찍어 낼 수 있는 판이다.
+    
+    // function User(name, age) {
+    //  this = {} // 순서1) 빈 객체를 만들어 준다. #생략
+    //  this.name = name;
+    //  this.age = age; // 순서2) 값들을 할당한다.
+    //  return this; // 순서3) this값을 반환해준다. #생략
+    // }
+    
+    // new 함수명(); - new User();
+    // new를 붙여서 생성해주면 #생략을 제외한 나머지로 생성해준다. 
+    // 일일히 만들어 줄 필요가 없고 수정시 생성자 함수만 만들어 주면 된다.
+    // 어떠한 것이라도 new로 생성해주면 편하고 빠르다.
+
+    // method
+    // user5.sayName(); // 'Han'
+    // sayName에서 this.name의 this는 User5를 의미한다.
+
+    function Item(title, price) {
+      // this = {};
+      
+      this.title = title;
+      this.price = price;
+      this.showPrice = function() {
+        console.log(`가격은 ${price}원 입니다.`);
+      }
+
+      // return this;
+      // 주석 부분은 new 로 생성시 자동적으로 알고리즘이 생성해준다.
+    }
+
+    const item1 = new Item('인형', 3000);
+    const item2 = new Item('가방', 6000);
+    // const item2 = Item('가방', 6000); // undefined  // new가 없으면 그저 함수를 실행해주는 것이다.
+    const item3 = new Item('지갑', 9000);
+
+    console.log(item1, item2, item3);
+
+    item3.showPrice();
+
+    // 비슷한 객체를 여러개 만들때 생성자함수를 꼭 사용하자. // 첫글자는 대문자이다.
+
+  </script>
+</body>
+</html>

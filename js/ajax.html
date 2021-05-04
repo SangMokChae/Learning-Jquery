@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>time : <span id="time"></span></p>
+  <!-- 여기 id = "time"에 값이 들어 갈 것이다. -->
+  <input type="button" id="execute" value="execute" />
+  <!-- execute를 클릭했을 시에 서버와 통신을 할 것이다. -->
+
+  <script>
+    // Ajax는 비동기적으로 Js를 이용해서 서버와 통신하는 방식
+    // 이때 사용하는 API = XMLHttpRequest가 해당된다.
+    // JSON을 많이 사용된다.
+
+    document.querySelector('input').addEventListener('click', function(e) {
+      let xhr = new XMLHttpRequest(); // XMLHttpRequest를 생성하고
+      xhr.open('GET', './time.jsp'); // open을 먼저 해 줘야 한다. // 서버와 통신에서 get방식을 쓰고 서버의 url은 ./ 같은 디렉토리에 있다. /
+      // './time.jsp'는 form에서 action에 해당한다.
+      xhr.onreadystatechange = function() { // 가능한 통신이 끝났다라고 하는 것을 표시해주는게 중요하다.
+        if(xhr.readyState === 4 && xhr.status === 200) {
+          // reqdyState -> 현재 이런 상태에 있다. 같은 것을 알 수 있다.
+          // 4는 모든 것이 끝났다.를 의미한다.
+          // xhr.status === 200 에서 200은 성공을 의미한다.
+          // 404는 요청 리소스가 존재하지 않는다.
+          // 앞에꺼는 통신이 완료됬다, 뒤에는 통신이 성공했다.를 의미한다.
+          document.querySelector('#time').innerHTML = xhr.responseText; // 안에 가져온 값을 넣는다.
+          // server에서 보내준 정보를 responseText property안에 보내준다.
+        }
+      }
+      xhr.send(); // send가 호출 될때 xhr Ajax객체가 시작할때 ./time.jsp으로 통신을 시작한다.
+    });
+
+    setInterval(document.querySelector('time'), 1000);
+  </script>
+</body>
+</html>
