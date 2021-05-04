@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p id="timer"> time : <span id="time"></span></p>
+	<input type="button" id="execute" value="execute" />
+	
+	<script>
+		document.querySelector('input').addEventListener('click', function(e) {
+			let xhr = new XMLHttpRequest();
+			xhr.open('GET', './time.jsp');
+			xhr.onreadystatechange = function() {
+				if(xhr.readyState === 4 && xhr.status === 200) {
+					document.querySelector('#time').innerHTML = xhr.responseText;
+				}
+			}
+			xhr.send();
+		});
+		
+		setInterval(document.querySelector('#timer'), 1000);
+	</script>
+</body>
+</html>
