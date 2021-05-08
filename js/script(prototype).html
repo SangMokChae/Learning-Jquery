@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // property
+    // property가 존재하는지 확인하는 함수 .hasOwnProperty();
+
+    const user = {
+      name : 'Mike',
+    }
+
+    console.log(user.hasOwnProperty('name')); // true
+    console.log(user.hasOwnProperty('age')); // false
+    // user안에 해당 property가 존재 하면 true 아니면 false
+
+    // 상속
+
+    // 상위 개념 생성
+    const car = {
+      wheels : 4,
+      drive() {
+        console.log("drive..");
+      },
+    };
+
+    const bmw = {
+      color : "red",
+      navigation : 1,
+    };
+
+    const benz = {
+      color : "black",
+    };
+
+    const audi = {
+      color : "blue",
+    };
+
+    // 상속할때 자식격.__proto__ = 부모격
+
+    bmw.__proto__ = car;
+    benz.__proto__ = car;
+    audi.__proto__ = car;
+
+    console.log(bmw); // {color: "red", navigation: 1}
+    console.log(bmw.wheels); // 4
+
+    // 처음 bmw의 내부 property를 먼저 확인하고 그후에 상속된 property를 찾아본다.
+    // 상속은 계속 이어질 수 있다.
+
+    const x5 = {
+      color: "white",
+      name : "x5",
+    };
+
+    x5.__proto__ = bmw;
+
+    console.log(x5);
+
+    console.log(x5.navigation);
+
+    // car > bmw > x5
+    // 상속은 계속 이어 질 수 있다.
+
+    // 이처럼 이어지는 것을 prototype chain이라고 한다.
+
+    for(p in x5) {
+      console.log(p);
+    }
+    // color, name, navigation, wheel, drive 등으로 이루어져 있다
+    // x5안의 모든 property를 보연준다.
+    
+    console.log(Object.keys(x5)); // ["color", "name"]
+    console.log(Object.values(x5)); // ["white", "x5"]
+
+    // Object를 했다면 x5안의 값들만 얻을 수 있다.
+
+    // for in을 사용한 찾기
+    for(p in x5) {
+      if(x5.hasOwnProperty(p)) { // 객체가 직접 가지고 있는 property만 반환해준다.
+        console.log('o', p);
+      } else {
+        console.log('x', p);
+      }
+    }
+
+    // 생성자 함수를 이용한 방법
+
+    const car1 = {
+      wheels : 4,
+      drive() {
+        console.log("dirve...");
+      },
+    };
+
+    const Bmw = function (color) {
+      this.color = color;
+      // this.wheels = 4;
+      // this.drive = function () {
+      //   console.log("drive...");
+      // };
+    };
+
+    const x6 = new Bmw("red");
+    const z4 = new Bmw("blue");
+
+    x6.__proto__ = car1; // car1을 상속 받는다.
+    z4.__proto__ = car1; // car1을 상속 받는다.
+
+    console.log(x6);
+    console.log(z4);
+
+    // 생성자 함수를 위한 좀더 간편하게
+
+    const Benz = function (color) {
+      this.color = color;
+    };
+
+    Benz.prototype.wheels = 4; // __proto__를 이렇게 설정한다고 한다.
+    Benz.prototype.drive = function () {
+      console.log("drive...");
+    };
+    Benz.prototype.navigation = 1;
+    Benz.prototype.stop = function () {
+      console.log("STOP!!!");
+    };
+
+    // 깔끔히 (사용시 수동으로 생성자를 명시해주고 실행할것)
+
+    /*
+    Benz.prototype = {
+      constructor : Benz,
+      wheels : 4,
+      drive() {
+        console.log("dirve...");
+      },
+      navigation : 1,
+      stop() {
+        conosole.log("STOP!!");
+      },
+    };
+
+    // 이런 식이면 constructor가 사라진다.
+    s6.constructor === Benz // false
+    그래서 하나 위의 처럼 하나 하나씩 하는 것이 좋다.
+    */
+
+    //prototype를 통해서 중복코드를 줄일 수 있다.
+
+    const c3 = new Benz("white");
+    const s6 = new Benz("black");
+
+    console.log(c3.stop());
+    console.log(s6);
+
+    // instanceof 상속이 되었는지 확인 해주는 함수 true / false로 반환한다.
+
+    console.log(s6 instanceof Benz); // true
+
+    console.log(s6.constructor === Benz); // ture
+    // constructor는 생성자 Benz를 가르킨다.
+
+    const Audi = function (color) {
+      const c = color;
+      this.getColor = function () {
+        console.log(c);
+      };
+    };
+
+    const v3 = new Audi("red");
+
+    console.log(v3.getColor());
+  </script>
+</body>
+</html>

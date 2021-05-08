@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Closere
+    // 함수 선언문에 대한 기초 지식이 필요하다.
+    // 함수와 렉시컬(Lexical) 환경의 조합
+    // 함수가 생성될 당시의 외부 변수를 기억
+    // 생성된 이후에도 계속 접근 가능
+
+    // 어휘적 환경(Lexical Environment)
+
+    let one; // let으로 선언 되어도 호이스팅이 가능하다.
+    one = 1;
+
+    function addOne(num) {
+      console.log(one + num);
+      // 내부 Lexical 환경에서 우선 찾고 없으면 외부 그리고 없으면 전역에서 찾는다.
+      // one 과 num은 내부 Lexical 환경에서 찾는다.(num = 5)
+    }
+
+    addOne(5);
+    // 새로운 내부 Lexical 환경 생성 num = 5;
+
+    // 전역 Lexical 환경 (코드가 실행시에 초기 환경)
+    // one : 초기화 X,(사용 불가)  addOne : function(사용 가능)
+    // one : 초기화 X -> undefined -> 1
+
+    function makeAdder(x) {
+      return function(y) {
+        return x + y;
+      }
+    }
+
+    const add3 = makeAdder(3);
+    console.log(add3(2)); // 5 
+    // add3(2) 에서 2는 y 값에 해당한다.
+    // add3 함수가 생성된 이후에도 상위함수인 makeAdder의 x에 접근 가능
+
+    // 어휘적 환경 순서
+    // 1. 익명함수 Lexical 환경 // y : 2
+    // 2. makeAdder Lexical 환경 // x : 3
+    // 3. 전역 Lexical 환경 // makeAdder : function, addr3 : function
+
+  const add10 = makeAdder(10);
+  console.log(add10(5)); // 15
+  console.log(add3(1)); // 4
+
+  function makeCounter() {
+    let num = 0; // 외부 함수의 변수
+
+    return function() { // 내부 함수
+      return num++; // 외부 함수에 접근
+    };
+  }
+
+  let counter = makeCounter();
+
+  console.log(counter()); // 0
+  console.log(counter()); // 1
+  console.log(counter()); // 2
+  // 숫자를 변경할 수 없다.
+
+  </script>
+</body>
+</html>

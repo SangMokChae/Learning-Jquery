@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Destructuring assignment
+    // 구조 분해 할당 구문은 배열이나 객체의 속성을 분해해서 그값을 변수에 담을 수 있게 하는 표현식
+
+    let [x, y] = [1, 2];
+
+    console.log(x); // 1
+    console.log(y); // 2
+
+    let users = ['Mike', 'Tom', 'Jane'];
+
+    let [user1, user2, user3] = users;
+    // 구조 분해 할당
+
+    /*
+      위의 코드와 같은 의미
+      let user1 = users[0];
+      let user2 = users[1];
+      let user3 = users[2];
+    */
+
+    console.log(user1); // "Mike"
+    console.log(user2); // "Tom"
+    console.log(user3); // "Jane"
+
+    let str = "Mike-Tom-Jane";
+
+    [user1, user2, user3] = str.split('-');
+    // '-'를 기준으로 자른다.
+
+    console.log(user1); // Mike
+    console.log(user2); // Tom
+    console.log(user3); // Jane
+
+    // if
+    let [a, b, c] = [1, 2];
+
+    console.log(a); // 1
+    console.log(b); // 2
+    console.log(c); // undefined
+
+    [a = 3, b = 4, c = 5] = [1, 2]; // 기본 값을 설정한다.
+
+    console.log(a); // 1 
+    console.log(b); // 2
+    console.log(c); // 5 기본 값이 출력된다.
+
+    [user1, , user2] = ['Mike', 'Tom', 'Jane', 'Tony'];
+
+    console.log(user1); // "Mike"
+    console.log(user2); // "Jane"
+
+    // 공백을 이용해서 'Tom'과 뒤의 'Tony'는 생략할 수 있다.
+
+    // 배열 구조 분해 : 바꿔치기
+
+    a = 1;
+    b = 2;
+    c = a; // 임시 c를 만들어 준다.
+
+    a = b; // a = 2, b = 2, c = 1;
+    b = c; // a = 2, b = 1, c = 1;
+    // 복잡함
+
+    [a, b] = [b, a]; // [1, 2] => [2, 1] 
+    // 구조 부해 할당
+    // 간단하다.
+
+    // 객체 구조 분해
+
+    user = {
+      name: 'Mike',
+      age: 30,
+    }
+
+    let {name, age} = user;
+    // let {age, name} = user; // 똑같이 작동한다.
+
+    /*
+       = let name = user.name;
+       = let age = user.age;
+    */
+
+    console.log(name); // "Mike"
+    console.log(age); // 30
+
+    // 객체 구조 분해 : 새로운 변수 이름으로 할당
+
+    let {
+      name : userName,
+      age : userAge,
+    } = user;
+
+    console.log(userName); // "Mike"
+    console.log(userAge); // 30
+
+    // if
+
+    user =  {
+      name : "Jane",
+      age : 18,
+      gender : 'female',
+    };
+
+   let {name1, age1, gender = 'male'} = user;
+
+    console.log(gender); // female
+
+  </script>
+</body>
+</html>

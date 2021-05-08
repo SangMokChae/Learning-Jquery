@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function showName(name) { // showName(name) 에서 인수(name) 의 갯수 제한은 없다.
+      console.log(name);
+    }
+
+    showName('Mike'); // 'Mike'
+    showName('Mike', 'Tom'); // ??? -> "Mike"만 찍힌다.
+    showName(); // undefined 가 찍힌다.
+
+    // 함수의 인수에 접근하는 방법
+    // 1. arguments, 2. 나머지 매개 변수
+    // 과거에는 1번 최근에는 2번  // Arrow function에는 arguments가 존재하지 않는다.
+
+    // arguments는 
+    // 함수로 넘어온 모든 인수에 접근 가능
+    // 함수내에서 이용 가능한 지역 변수
+    // length / idnex -> Array 형태의 객체
+    // 배열의 내장 메서드 없음 (forEach, map)를 사용 불가
+
+    function showName(name) {
+      console.log(arguments.length); // 2
+      console.log(arguments[0]); // "Mike"
+      console.log(arguments[1]); // "Tom"
+    }
+
+    showName('Mike', 'Tom');
+
+    // ES6사용 가능 환경일때 나머지 매개변수 사용 (권장)
+    // 정해지지 않은 배열을 갯수를 나타낼수 있게 한다 ...+(변수명)를 사용
+    // forEach등 배열의 method를 사용 가능 하다.
+    function showName(...names) {
+      console.log(names);
+    }
+
+    showName(); // []
+    showName('Mike'); // ['Mike']
+    showName('Mike', 'Tom'); // ['Mike', 'Tom']
+
+    function add(...numbers) {
+      // let result = 0;
+      // numbers.forEach((num) => (result += num));
+      let result = numbers.reduce((prev, cur) => prev + cur);
+      console.log(result);
+    }
+
+    add(1, 2, 3);
+    add(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+    function User(name, age, ...skills) { // 생성자 함수는 첫글자는 대문자로 적어준다.
+      this.name = name;
+      this.age = age;
+      this.skills = skills;
+    }
+    // skill은 사람 마다 가지고 있는 갯수가 가지 각색이라서 나머지 매개변수로 ...를 사용한다.
+
+    const user1 = new User('Mike', 30, 'html', 'css');
+    const user2 = new User('Tom', 20, 'JS', 'React');
+    const user3 = new User('Mike', 10, 'English');
+
+    console.log(user1);
+    console.log(user2);
+    console.log(user3); // 값이 잘 들어 간다.
+
+    // 나머지 매개 변수는 항상 마지막에 위치해야 한다.
+
+    // 전개 구문(Spread syntax) : 배열
+
+    let arr1 = [1,2,3];
+    let arr2 = [4,5,6];
+
+    let result = [...arr1, ...arr2];
+    // ...arr1 = 1,2,3을 풀어서 사용, ...arr2 = 4,5,6을 풀어서 사용
+
+    console.log(result); // [1,2,3,4,5,6]
+
+    result = [0, ...arr1, ...arr2, 7, 8, 9];
+    
+    console.log(result); // [1,2,3,4,5,6,7,8,9]
+
+    // arr.push() (삽입) / arr.splice() (삭제 & 변경) / arr.concat() (합체) ex) arr1.concat(arr2); ==> ["1","2","3","4","5","6"] 
+    
+    arr1 = [1,2,3];
+    arr2 = [...arr1]; // [1,2,3]  복제로 사용 가능하다.
+
+    let user = {
+      name : 'Mike',
+      age : 30,
+    };
+
+    let user4 = {...user};
+
+    user4.name = "Tom";
+
+    console.log(user.name); // "Mike"
+    console.log(user4.name); // "Tom"
+
+    arr1 = [1,2,3];
+    arr2 = [4,5,6];
+
+    /*
+    arr2.reverse().forEach(num => { // reverse()를 이용해서 한번 역으로 실행 시켜준후 넣어줘야 4,5,6 처럼 찍힌다.
+      arr1.unshift(num); // 앞에다 넣어주기
+    });
+    */
+
+    arr1 = [...arr2, ...arr1]; // 같은 값이지만 간단히 가능하다.
+
+    console.log(arr1);
+
+    user = { name : "Mike"};
+    let info = { age : 30};
+    let fe = ["JS", "React"];
+    let lang = ["Korean", "English"];
+
+    user = Object.assign({}, // 객체 복제
+      user,
+      info,
+      {
+        skills : []
+      });
+
+      user.skills = [...fe, ...lang];
+
+      // 위의 주석과 같은 것
+      // fe.forEach(item => {
+      //   user.skills.push(item);
+      // });
+      // lang.forEach(item => {
+      //   user.skills.push(item);
+      // });
+
+      // 위의 주석과 같은 것
+      // user = {
+      //   ...user,
+      //   ...info,
+      //   skills : [...fe, ...lang],
+      // }
+
+    console.log(user);
+
+    </script>
+</body>
+</html>
